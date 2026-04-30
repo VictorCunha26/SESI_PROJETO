@@ -5,21 +5,25 @@ body{
     background-color: rgb(0, 0, 0);
     font-family: "Poppins", sans-serif;
     color: white;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 
 .card_login{
     background-color: rgb(180, 8, 8);
     width: 300px;
-    height: 400px;
+    height: 350px;
     border-radius: 30px;
 }
 
 .logo{
     display: flex;
     align-items: center;
-    
+    justify-content: space-between;
 }
 .logo_sesi{
     width: 100px;
