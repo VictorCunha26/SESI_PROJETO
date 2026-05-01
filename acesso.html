@@ -8,22 +8,30 @@
 
 </head>
 <body>
-    <div class="card_login">
-        <div class="logo">
-        <img src="https://cepesp.com.br/wp-content/uploads/2025/06/Novo_SESI-scaled.png" alt="logo" class="logo_sesi">
-        <p class="institution">Ae Carvalho</p>
-        </div>
-        <p class="welcome">Bem Vindo</p>
-        <p class="welcome-sub">Acesse sua conta</p>
-        <div class="info">
-            <form>
-                <label for="senha">Email</label><br>
-                <input type="email"><br>
-                <label for="senha">Senha</label><br>
-                <input type="password">
-            </form>
-            <button>Acessar</button>
-        </div>
+  <div class="card">
+    <div class="card-top-bar"></div>
+    <div class="header">
+      <img src="https://cepesp.com.br/wp-content/uploads/2025/06/Novo_SESI-scaled.png" alt="logo" class="logo_sesi"> 
+      <span class="unit-name">Ae Carvalho</span>
     </div>
+    <div class="welcome">Bem-vindo</div>
+    <div class="welcome-sub">Acesse sua conta para continuar</div>
+ 
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="seu@email.com.br" />
+    </div>
+ 
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="••••••••" />
+    </div>
+ 
+    <div class="forgot"><a href="#">Esqueci minha senha</a></div>
+ 
+    <button class="btn-login">Acessar</button>
+ 
+    <div class="footer-note">SESI — Serviço Social da Indústria</div>
+  </div>
 </body>
 </html>
