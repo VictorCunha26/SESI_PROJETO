@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main page</title>
-    <link rel="stylesheet" href="CSS/mainPage.css">
-    <script src="JS/mainPage.JS"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SESI — Gerenciador de Ocorrências</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/mainPage.css">
+  <script src="JS/mainPage.JS"></script>
 </head>
 <body>
-    <aside class="sidebar">
+
+<aside class="sidebar">
   <div class="sidebar-logo">
-    <img src="https://cepesp.com.br/wp-content/uploads/2025/06/Novo_SESI-scaled.png" alt="logo" class="logo_sesi">
+    <img src="https://cepesp.com.br/wp-content/uploads/2025/06/Novo_SESI-scaled.png" alt="logo" class="logo_sesi"> 
     <div class="logo-sub">Ae Carvalho<br/>Ocorrencias</div>
   </div>
   <nav class="nav">
@@ -21,13 +23,13 @@
   </nav>
   <div class="sidebar-footer">SESI — Servico Social da Industria</div>
 </aside>
- 
+
 <main class="main">
   <div class="topbar">
     <div class="page-title" id="topbar-title">Dashboard</div>
     <span class="badge-unit">Ae Carvalho</span>
   </div>
- 
+
   <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
     <div class="grid-4 mb-3">
@@ -52,7 +54,7 @@
         <div class="stat-sub">este periodo</div>
       </div>
     </div>
- 
+
     <div class="grid-2 mb-3">
       <div class="card">
         <div class="card-top-bar"></div>
@@ -65,13 +67,13 @@
         <div class="bar-wrap" id="chart-tipos"><div class="empty"><div class="empty-line"></div>Sem dados ainda</div></div>
       </div>
     </div>
- 
+
     <div class="card">
       <div class="card-top-bar"></div>
       <div class="section-header"><div class="card-title" style="margin-bottom:0">Ultimas Ocorrencias</div></div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Aluno</th><th>RM</th><th>Sala</th><th>Tipo</th><th>Gravidade</th><th>Data</th></tr></thead>
+          <thead><tr><th>Aluno</th><th>RA</th><th>Sala</th><th>Tipo</th><th>Gravidade</th><th>Data</th></tr></thead>
           <tbody id="dash-recentes">
             <tr><td colspan="6"><div class="empty"><div class="empty-line"></div>Nenhuma ocorrencia</div></td></tr>
           </tbody>
@@ -79,7 +81,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- ALUNOS -->
   <div class="page" id="page-alunos">
     <div class="section-header mb-2">
@@ -87,14 +89,14 @@
       <button class="btn btn-primary" onclick="openModal('modal-aluno')">+ Novo Aluno</button>
     </div>
     <div class="search-row">
-      <input type="text" id="busca-alunos" placeholder="Buscar por nome ou RM..." oninput="renderAlunos()" />
+      <input type="text" id="busca-alunos" placeholder="Buscar por nome ou RA..." oninput="renderAlunos()" />
       <select class="filter-select" id="filtro-sala-alunos" onchange="renderAlunos()">
         <option value="">Todas as salas</option>
       </select>
     </div>
     <div id="alunos-container"></div>
   </div>
- 
+
   <!-- OCORRENCIAS -->
   <div class="page" id="page-ocorrencias">
     <div class="section-header mb-2">
@@ -111,7 +113,7 @@
       <div class="card-top-bar"></div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Aluno</th><th>RM</th><th>Sala</th><th>Tipo</th><th>Gravidade</th><th>Data</th><th>Acoes</th></tr></thead>
+          <thead><tr><th>Aluno</th><th>RA</th><th>Sala</th><th>Tipo</th><th>Gravidade</th><th>Data</th><th>Anexo</th><th>Acoes</th></tr></thead>
           <tbody id="table-ocorrencias">
             <tr><td colspan="7"><div class="empty"><div class="empty-line"></div>Nenhuma ocorrencia registrada</div></td></tr>
           </tbody>
@@ -119,7 +121,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- SALAS -->
   <div class="page" id="page-salas">
     <div class="section-header mb-2">
@@ -133,7 +135,7 @@
     </div>
   </div>
 </main>
- 
+
 <!-- MODAL ALUNO -->
 <div class="modal-overlay" id="modal-aluno">
   <div class="modal">
@@ -141,7 +143,7 @@
     <div class="modal-title">Novo Aluno</div>
     <div class="field"><label>Nome Completo</label><input type="text" id="aluno-nome" placeholder="Ex: Joao da Silva" /></div>
     <div class="grid-2">
-      <div class="field"><label>RM</label><input type="text" id="aluno-rm" placeholder="Ex: 123456" /></div>
+      <div class="field"><label>RA</label><input type="text" id="aluno-rm" placeholder="Ex: 12345678901" maxlength="12" inputmode="numeric" /></div>
       <div class="field"><label>Sala</label><select id="aluno-sala"><option value="">Sem sala</option></select></div>
     </div>
     <div class="modal-actions">
@@ -150,7 +152,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL OCORRENCIA -->
 <div class="modal-overlay" id="modal-ocorrencia">
   <div class="modal">
@@ -181,13 +183,27 @@
     </div>
     <div class="field"><label>Data</label><input type="date" id="oc-data" /></div>
     <div class="field"><label>Descricao</label><textarea id="oc-desc" placeholder="Descreva o ocorrido..."></textarea></div>
+    <div class="field">
+      <label>Anexo (opcional)</label>
+      <div class="file-drop" id="file-drop-zone">
+        <input type="file" id="oc-arquivo" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="handleFileSelect(this)" />
+        <div class="file-drop-icon">+</div>
+        <div class="file-drop-text"><span>Clique para anexar</span> ou arraste o arquivo</div>
+        <div class="file-drop-hint">PDF, DOC, DOCX, JPG, PNG — max 5 MB</div>
+      </div>
+      <div class="file-preview" id="file-preview">
+        <div class="file-preview-name" id="file-preview-name">—</div>
+        <div class="file-preview-size" id="file-preview-size"></div>
+        <button class="file-preview-remove" onclick="removerArquivo()" title="Remover">x</button>
+      </div>
+    </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal('modal-ocorrencia')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarOcorrencia()">Registrar</button>
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL SALA -->
 <div class="modal-overlay" id="modal-sala">
   <div class="modal">
@@ -199,12 +215,20 @@
         <select id="sala-turno"><option>Manha</option><option>Tarde</option><option>Noite</option></select>
       </div>
     </div>
-    <div class="field"><label>Serie / Curso</label><input type="text" id="sala-serie" placeholder="Ex: 3o Ano Ensino Medio" /></div>
+    <div class="field"><label>Serie / Curso</label>
+        <select id="sala-serie">
+          <option value="">Selecione...</option>
+          <option value="Fundamental I">Fundamental I</option>
+          <option value="Fundamental II">Fundamental II</option>
+          <option value="Ensino Medio">Ensino Medio</option>
+        </select>
+      </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal('modal-sala')">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarSala()">Salvar Sala</button>
     </div>
   </div>
 </div>
+<div id="toast-container"></div>
 </body>
 </html>
