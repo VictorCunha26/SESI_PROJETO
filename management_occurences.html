@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main page</title>
+    <link rel="stylesheet" href="CSS/mainPage.css">
+    <script src="JS/mainPage.JS"></script>
+</head>
+<body>
+    <aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="https://cepesp.com.br/wp-content/uploads/2025/06/Novo_SESI-scaled.png" alt="logo" class="logo_sesi">
+    <div class="logo-sub">Ae Carvalho<br/>Ocorrencias</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-item active" onclick="goPage('dashboard')"><span class="nav-dot"></span> Dashboard</div>
+    <div class="nav-item" onclick="goPage('alunos')"><span class="nav-dot"></span> Alunos</div>
+    <div class="nav-item" onclick="goPage('ocorrencias')"><span class="nav-dot"></span> Ocorrencias</div>
+    <div class="nav-item" onclick="goPage('salas')"><span class="nav-dot"></span> Salas</div>
+  </nav>
+  <div class="sidebar-footer">SESI — Servico Social da Industria</div>
+</aside>
+ 
+<main class="main">
+  <div class="topbar">
+    <div class="page-title" id="topbar-title">Dashboard</div>
+    <span class="badge-unit">Ae Carvalho</span>
+  </div>
+ 
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div class="grid-4 mb-3">
+      <div class="stat-card">
+        <div class="stat-label">Total de Alunos</div>
+        <div class="stat-value" id="dash-alunos">0</div>
+        <div class="stat-sub">cadastrados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ocorrencias</div>
+        <div class="stat-value" id="dash-total">0</div>
+        <div class="stat-sub">registradas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Salas</div>
+        <div class="stat-value" id="dash-salas">0</div>
+        <div class="stat-sub">cadastradas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Graves</div>
+        <div class="stat-value" id="dash-graves">0</div>
+        <div class="stat-sub">este periodo</div>
+      </div>
+    </div>
+ 
+    <div class="grid-2 mb-3">
+      <div class="card">
+        <div class="card-top-bar"></div>
+        <div class="card-title">Ocorrencias por Sala</div>
+        <div class="bar-wrap" id="chart-salas"><div class="empty"><div class="empty-line"></div>Sem dados ainda</div></div>
+      </div>
+      <div class="card">
+        <div class="card-top-bar"></div>
+        <div class="card-title">Ocorrencias por Tipo</div>
+        <div class="bar-wrap" id="chart-tipos"><div class="empty"><div class="empty-line"></div>Sem dados ainda</div></div>
+      </div>
+    </div>
+ 
+    <div class="card">
+      <div class="card-top-bar"></div>
+      <div class="section-header"><div class="card-title" style="margin-bottom:0">Ultimas Ocorrencias</div></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Aluno</th><th>RM</th><th>Sala</th><th>Tipo</th><th>Gravidade</th><th>Data</th></tr></thead>
+          <tbody id="dash-recentes">
+            <tr><td colspan="6"><div class="empty"><div class="empty-line"></div>Nenhuma ocorrencia</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ALUNOS -->
+  <div class="page" id="page-alunos">
+    <div class="section-header mb-2">
+      <div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-aluno')">+ Novo Aluno</button>
+    </div>
+    <div class="search-row">
+      <input type="text" id="busca-alunos" placeholder="Buscar por nome ou RM..." oninput="renderAlunos()" />
+      <select class="filter-select" id="filtro-sala-alunos" onchange="renderAlunos()">
+        <option value="">Todas as salas</option>
+      </select>
+    </div>
+    <div id="alunos-container"></div>
+  </div>
+ 
+  <!-- OCORRENCIAS -->
+  <div class="page" id="page-ocorrencias">
+    <div class="section-header mb-2">
+      <div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-ocorrencia')">+ Nova Ocorrencia</button>
+    </div>
+    <div class="search-row">
+      <input type="text" id="busca-oc" placeholder="Buscar por aluno, sala ou tipo..." oninput="renderOcorrencias()" />
+      <select class="filter-select" id="filtro-sala-oc" onchange="renderOcorrencias()">
+        <option value="">Todas as salas</option>
+      </select>
+    </div>
+    <div class="card">
+      <div class="card-top-bar"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Aluno</th><th>RM</th><th>Sala</th><th>Tipo</th><th>Gravidade</th><th>Data</th><th>Acoes</th></tr></thead>
+          <tbody id="table-ocorrencias">
+            <tr><td colspan="7"><div class="empty"><div class="empty-line"></div>Nenhuma ocorrencia registrada</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- SALAS -->
+  <div class="page" id="page-salas">
+    <div class="section-header mb-2">
+      <div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-sala')">+ Nova Sala</button>
+    </div>
+    <div class="grid-3" id="grid-salas">
+      <div class="card" style="text-align:center;padding:2rem;">
+        <div class="empty"><div class="empty-line"></div>Nenhuma sala cadastrada</div>
+      </div>
+    </div>
+  </div>
+</main>
+ 
+<!-- MODAL ALUNO -->
+<div class="modal-overlay" id="modal-aluno">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-aluno')">x</button>
+    <div class="modal-title">Novo Aluno</div>
+    <div class="field"><label>Nome Completo</label><input type="text" id="aluno-nome" placeholder="Ex: Joao da Silva" /></div>
+    <div class="grid-2">
+      <div class="field"><label>RM</label><input type="text" id="aluno-rm" placeholder="Ex: 123456" /></div>
+      <div class="field"><label>Sala</label><select id="aluno-sala"><option value="">Sem sala</option></select></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modal-aluno')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarAluno()">Salvar Aluno</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- MODAL OCORRENCIA -->
+<div class="modal-overlay" id="modal-ocorrencia">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-ocorrencia')">x</button>
+    <div class="modal-title">Nova Ocorrencia</div>
+    <div class="field"><label>Aluno</label><select id="oc-aluno"><option value="">Selecione o aluno...</option></select></div>
+    <div class="grid-2">
+      <div class="field"><label>Tipo</label>
+        <select id="oc-tipo">
+          <option value="">Selecione...</option>
+          <option>Indisciplina</option>
+          <option>Agressao verbal</option>
+          <option>Agressao fisica</option>
+          <option>Uso de celular</option>
+          <option>Desrespeito ao professor</option>
+          <option>Bullying</option>
+          <option>Vandalismo</option>
+          <option>Outra</option>
+        </select>
+      </div>
+      <div class="field"><label>Gravidade</label>
+        <select id="oc-gravidade">
+          <option value="1">Leve</option>
+          <option value="2">Moderada</option>
+          <option value="3">Grave</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>Data</label><input type="date" id="oc-data" /></div>
+    <div class="field"><label>Descricao</label><textarea id="oc-desc" placeholder="Descreva o ocorrido..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modal-ocorrencia')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarOcorrencia()">Registrar</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- MODAL SALA -->
+<div class="modal-overlay" id="modal-sala">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-sala')">x</button>
+    <div class="modal-title">Nova Sala</div>
+    <div class="grid-2">
+      <div class="field"><label>Nome da Sala</label><input type="text" id="sala-nome" placeholder="Ex: 3A" /></div>
+      <div class="field"><label>Turno</label>
+        <select id="sala-turno"><option>Manha</option><option>Tarde</option><option>Noite</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Serie / Curso</label><input type="text" id="sala-serie" placeholder="Ex: 3o Ano Ensino Medio" /></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modal-sala')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarSala()">Salvar Sala</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
